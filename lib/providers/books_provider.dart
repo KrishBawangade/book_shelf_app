@@ -9,10 +9,12 @@ class BooksProvider extends ChangeNotifier {
   }
 
   List<BookDataModel> _bookList = [];
+  List<BookDataModel> _searchedBookList = [];
   List<BookDataModel> _selectedBookList = [];
   bool _isLoading = false;
 
   List<BookDataModel> get bookList => _bookList;
+  List<BookDataModel> get searchedBookList => _searchedBookList;
   List<BookDataModel> get selectedBookList => _selectedBookList;
   bool get isLoading => _isLoading;
 
@@ -26,6 +28,7 @@ class BooksProvider extends ChangeNotifier {
       BooksApiResponseModel booksApiResponse =
           await booksApiClient.getBooksApiResponse();
       _bookList = booksApiResponse.data.books;
+      _searchedBookList = _bookList;
       _isLoading = false;
       notifyListeners();
     } on Exception catch (e) {
@@ -37,6 +40,20 @@ class BooksProvider extends ChangeNotifier {
 
   void setSelectedBookList({required List<BookDataModel> bookList}) {
     _selectedBookList = bookList;
+    notifyListeners();
+  }
+
+  void onBookSearched({required String query}){
+    String formattedQuery = query.replaceAll(" ", "").toLowerCase();
+    if(formattedQuery.isEmpty){
+      _searchedBookList = _bookList;
+      notifyListeners();
+      return;
+    }
+    _searchedBookList =  _bookList.where((bookData){
+      String formattedBookTitle = bookData.title.replaceAll(" ", "").toLowerCase();
+      return formattedBookTitle.contains(formattedQuery);
+    }).toList();
     notifyListeners();
   }
 }

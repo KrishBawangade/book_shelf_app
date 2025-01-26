@@ -4,12 +4,21 @@ import 'package:book_shelf_app/providers/books_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SelectBooksPage extends StatelessWidget {
+class SelectBooksPage extends StatefulWidget {
   const SelectBooksPage({super.key});
+
+  @override
+  State<SelectBooksPage> createState() => _SelectBooksPageState();
+}
+
+class _SelectBooksPageState extends State<SelectBooksPage> {
+
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     BooksProvider booksProvider = Provider.of(context);
+
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -51,6 +60,10 @@ class SelectBooksPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   SearchBar(
+                    controller: _searchController,
+                    onChanged: (query) {
+                      booksProvider.onBookSearched(query: query);
+                    },
                     elevation: WidgetStateProperty.resolveWith(
                       (states) {
                         return 0;
@@ -86,7 +99,7 @@ class SelectBooksPage extends StatelessWidget {
                                     spacing: 16,
                                     runSpacing: 16,
                                     children:
-                                        booksProvider.bookList.map((bookData) {
+                                        booksProvider.searchedBookList.map((bookData) {
                                       return SingleBookItemWidget(
                                           bookData: bookData);
                                     }).toList(),
