@@ -116,9 +116,10 @@ class _OrganizeBookShelfPageState extends State<OrganizeBookShelfPage> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 25,
+                          fontSize: 30,
+                          fontFamily: "KalamRegular",
                           color: Colors.white,
-                          height: 0.5
+                          height: 1
                           ),
                       decoration: InputDecoration(
                         border: OutlineInputBorder(borderSide: BorderSide.none),

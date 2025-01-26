@@ -29,5 +29,12 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts: 
+    - family: PassionOne
+      fonts: 
+        - asset: lib/assets/fonts/passion_one_regular.ttf
+    - family: KalamRegular
+      fonts: 
+        - asset: lib/assets/fonts/kalam_regular.ttf
   assets:
     - lib/assets/images/
