@@ -1,4 +1,4 @@
-import 'package:book_shelf_app/pages/main_page/select_books_page.dart';
+import 'package:book_shelf_app/pages/select_books_page/select_books_page.dart';
 import 'package:book_shelf_app/providers/books_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

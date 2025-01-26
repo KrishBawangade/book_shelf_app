@@ -10,14 +10,13 @@ class BooksProvider extends ChangeNotifier {
 
   List<BookDataModel> _bookList = [];
   List<BookDataModel> _selectedBookList = [];
-  bool _isLoading = false; 
+  bool _isLoading = false;
 
   List<BookDataModel> get bookList => _bookList;
   List<BookDataModel> get selectedBookList => _selectedBookList;
   bool get isLoading => _isLoading;
 
   Future<void> _loadBookList() async {
-
     _isLoading = true;
     notifyListeners();
 
@@ -27,15 +26,16 @@ class BooksProvider extends ChangeNotifier {
       BooksApiResponseModel booksApiResponse =
           await booksApiClient.getBooksApiResponse();
       _bookList = booksApiResponse.data.books;
+      _isLoading = false;
+      notifyListeners();
     } on Exception catch (e) {
       debugPrint("Error Occurred while fetching book list from api: $e!!");
+      _isLoading = false;
+      notifyListeners();
     }
-    _isLoading = false;
-    notifyListeners();
   }
 
-
-  void setSelectedBookList({required List<BookDataModel> bookList}){
+  void setSelectedBookList({required List<BookDataModel> bookList}) {
     _selectedBookList = bookList;
     notifyListeners();
   }

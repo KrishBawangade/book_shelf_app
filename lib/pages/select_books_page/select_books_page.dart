@@ -1,4 +1,5 @@
-import 'package:book_shelf_app/pages/main_page/widgets/single_book_item_widget.dart';
+import 'package:book_shelf_app/pages/organize_book_shelf_page.dart';
+import 'package:book_shelf_app/pages/select_books_page/widgets/single_book_item_widget.dart';
 import 'package:book_shelf_app/providers/books_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -124,7 +125,9 @@ class SelectBooksPage extends StatelessWidget {
                                                       .length !=
                                                   6
                                               ? null
-                                              : () {},
+                                              : () {
+                                                Navigator.of(context).push(MaterialPageRoute(builder: (_) => const OrganizeBookShelfPage()));
+                                              },
                                           child: Padding(
                                             padding: const EdgeInsets.all(16.0),
                                             child: Text(
