@@ -1,4 +1,5 @@
 import 'package:book_shelf_app/models/book_data_model.dart';
+import 'package:book_shelf_app/pages/share_image_page.dart';
 import 'package:book_shelf_app/providers/books_provider.dart';
 import 'package:book_shelf_app/utils/constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -323,7 +324,9 @@ class _OrganizeBookShelfPageState extends State<OrganizeBookShelfPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ShareImagePage()));
+                          },
                           child: Padding(
                             padding: const EdgeInsets.only(left: 8.0, right: 8),
                             child: Text("Download",
